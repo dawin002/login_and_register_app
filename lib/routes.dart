@@ -24,7 +24,7 @@ class Routes {
     // 이 아래는 settings.name으로 어떤 게 들어오면 그 화면을 띄워주는?
     // 그래서 화면 추가해주는 거로 이해했어요!
     switch (settings.name) {
-      case AppRoutes.login:
+      case AppRoutes.login: // 여기 login 컨트롤+클릭 해서 app_routes.dart 파일 들어가기
         return getRoute(widget: const LoginPage());
 
       case AppRoutes.register:
@@ -32,6 +32,7 @@ class Routes {
 
       case AppRoutes.home:  // 여기다가 케이스로 홈페이지 화면 추가하기
         return getRoute(widget: const HomePage());
+        // + 에러나면 맨위에 import 문 확인하기(home_screen.dart 임포트 한거)
 
       /// An invalid route. User shouldn't see this,
       /// it's for debugging purpose only.
