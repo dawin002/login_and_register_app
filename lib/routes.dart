@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_register_app/screens/home_screan.dart';
+import 'package:login_register_app/screens/home_screen.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
@@ -20,7 +20,9 @@ class Routes {
         fullscreenDialog: fullscreenDialog,
       );
     }
-
+    // 이 위는 딱히 설명 안하셨던 것 같구요
+    // 이 아래는 settings.name으로 어떤 게 들어오면 그 화면을 띄워주는?
+    // 그래서 화면 추가해주는 거로 이해했어요!
     switch (settings.name) {
       case AppRoutes.login:
         return getRoute(widget: const LoginPage());
@@ -28,7 +30,7 @@ class Routes {
       case AppRoutes.register:
         return getRoute(widget: const RegisterPage());
 
-      case AppRoutes.home:
+      case AppRoutes.home:  // 여기다가 케이스로 홈페이지 화면 추가하기
         return getRoute(widget: const HomePage());
 
       /// An invalid route. User shouldn't see this,
