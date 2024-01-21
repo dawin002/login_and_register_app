@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_register_app/screens/home_screan.dart';
 
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
@@ -26,6 +27,9 @@ class Routes {
 
       case AppRoutes.register:
         return getRoute(widget: const RegisterPage());
+
+      case AppRoutes.home:
+        return getRoute(widget: const HomePage());
 
       /// An invalid route. User shouldn't see this,
       /// it's for debugging purpose only.

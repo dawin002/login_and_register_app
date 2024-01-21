@@ -10,6 +10,6 @@ class AppConstants {
   );
 
   static final RegExp passwordRegex = RegExp(
-    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&_])[A-Za-z\d@#$!%*?&_].{7,}$',
+    r'^[0-9]{1,8}$',
   );
 }

@@ -28,6 +28,8 @@ class _LoginPageState extends State<LoginPage> {
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
+  final FirebaseAuthService _authService = FirebaseAuthService();
+
   void initializeControllers() {
     emailController = TextEditingController()..addListener(controllerListener);
     passwordController = TextEditingController()
@@ -53,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // 시작하면서 뭔가 만들어 둠! 스테이터스
   @override
   void initState() {
     initializeControllers();
@@ -151,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                                 SnackbarHelper.showSnackBar(
                                   AppStrings.loggedIn,
                                 );
-                                emailController.clear();
+                                // emailController.clear();
                                 passwordController.clear();
                               }
                             : null,
