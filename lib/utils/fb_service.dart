@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:login_register_app/utils/helpers/navigation_helper.dart';
+import 'package:login_register_app/values/app_routes.dart';
 
 // 파이어베이스 서버랑 통신을 하기 위한 코드
 
 class FirebaseAuthService {
+
   // 파이어베이스 어쓰에서 값을 가져오고 있다!
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -11,6 +14,10 @@ class FirebaseAuthService {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
+      );
+      print("Sign in(Login) succeed");
+      NavigationHelper.pushReplacementNamed(
+        AppRoutes.home,
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
@@ -26,6 +33,7 @@ class FirebaseAuthService {
         email: email,
         password: password,
       );
+      print("Sign up(register) succeed");
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       // Handle the exception

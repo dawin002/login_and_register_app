@@ -6,6 +6,7 @@ import 'package:login_register_app/values/app_regex.dart';
 import '../components/app_text_form_field.dart';
 import '../resources/resources.dart';
 import '../utils/common_widgets/gradient_background.dart';
+import '../utils/fb_service.dart';
 import '../utils/helpers/navigation_helper.dart';
 import '../values/app_constants.dart';
 import '../values/app_routes.dart';
@@ -30,6 +31,10 @@ class _LoginPageState extends State<LoginPage> {
 
   final FirebaseAuthService _authService = FirebaseAuthService();
 
+  // 리스너 -> 리스닝
+  // 옵저버
+  // 뷰모델, 지켜보다, 의존성을 약화시키는 방법
+
   void initializeControllers() {
     emailController = TextEditingController()..addListener(controllerListener);
     passwordController = TextEditingController()
@@ -41,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
   }
 
+  // 밸리데이션
   void controllerListener() {
     final email = emailController.text;
     final password = passwordController.text;
@@ -56,6 +62,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // 시작하면서 뭔가 만들어 둠! 스테이터스
+  // 입력이 잘 된 상태, 입력이 잘 안된 상태
+  // 파이어베이스(서버), 인증 해준 상태, 인증 안해준 상태
   @override
   void initState() {
     initializeControllers();
@@ -151,9 +159,18 @@ class _LoginPageState extends State<LoginPage> {
                       return FilledButton(
                         onPressed: isValid
                             ? () {
-                                SnackbarHelper.showSnackBar(
-                                  AppStrings.loggedIn,
+                                // 원래는 loggedIn 에 해당하는 문자열 알림 띄움
+                                // SnackbarHelper.showSnackBar(
+                                //   AppStrings.loggedIn,
+                                // );
+
+                                // 파이어베이스에 인증 요청 보내기
+                                _authService.signInWithEmailAndPassword(
+                                  emailController.text,
+                                  passwordController.text,
                                 );
+
+                                // 이메일, 비밀번호 텍스트 지워주는 코드
                                 // emailController.clear();
                                 passwordController.clear();
                               }

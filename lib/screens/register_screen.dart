@@ -3,6 +3,7 @@ import 'package:login_register_app/utils/helpers/snackbar_helper.dart';
 
 import '../components/app_text_form_field.dart';
 import '../utils/common_widgets/gradient_background.dart';
+import '../utils/fb_service.dart';
 import '../utils/helpers/navigation_helper.dart';
 import '../values/app_constants.dart';
 import '../values/app_regex.dart';
@@ -28,6 +29,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final ValueNotifier<bool> passwordNotifier = ValueNotifier(true);
   final ValueNotifier<bool> confirmPasswordNotifier = ValueNotifier(true);
   final ValueNotifier<bool> fieldValidNotifier = ValueNotifier(false);
+
+  final FirebaseAuthService _authService = FirebaseAuthService();
 
   void initializeControllers() {
     nameController = TextEditingController()..addListener(controllerListener);
@@ -222,13 +225,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       return FilledButton(
                         onPressed: isValid
                             ? () {
-                                SnackbarHelper.showSnackBar(
-                                  AppStrings.registrationComplete,
+                                // 회원가입 버튼 클릭 실행문 원본
+                                // SnackbarHelper.showSnackBar(
+                                //   AppStrings.registrationComplete,
+                                // );
+                                // nameController.clear();
+                                // emailController.clear();
+                                // passwordController.clear();
+                                // confirmPasswordController.clear();
+
+                                // 파이어베이스 회원가입 요청 보내기
+                                _authService.signUpWithEmailAndPassword(
+                                  emailController.text,
+                                  passwordController.text,
                                 );
-                                nameController.clear();
-                                emailController.clear();
-                                passwordController.clear();
-                                confirmPasswordController.clear();
                               }
                             : null,
                         child: const Text(AppStrings.register),

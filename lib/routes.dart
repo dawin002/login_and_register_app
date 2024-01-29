@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_register_app/screens/home_screen.dart';
 
+import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'utils/common_widgets/invalid_route.dart';
