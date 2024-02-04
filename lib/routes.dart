@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/default_card_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
@@ -33,6 +34,9 @@ class Routes {
       case AppRoutes.home:  // 여기다가 케이스로 홈페이지 화면 추가하기
         return getRoute(widget: const HomePage());
         // + 에러나면 맨위에 import 문 확인하기(home_screen.dart 임포트 한거)
+
+      case AppRoutes.default_card:
+        return getRoute(widget: const DefaultCardScreen());
 
       /// An invalid route. User shouldn't see this,
       /// it's for debugging purpose only.

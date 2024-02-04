@@ -1,0 +1,79 @@
+플러터 메인 스탬프 기능
+
+1. Firestore 데이터베이스 적용하기
+
+    1) Firebase 에서 Firestore 찾아 들어가기
+        파이어베이스 콘솔 -> 내 프로젝트 -> 빌드 -> Firestore Database
+
+    2) flutter 패키지 cloud_firestore 설치
+        안드로이드 스튜디오 터미널에 설치 명령어 입력
+            flutter pub add cloud_firestore
+        라이브러리 의존성을 추가해준 것
+
+2. FirebaseStoreService 만들기
+
+    1) lib -> utils 에 fb_store.dart 파일 생성
+
+    2) FirebaseStoreService 클래스 선언
+
+    3) 유저 아이디 가져오기
+        로그인한 아이디에 맞는 DB에 들어가서 스탬프 데이터를 가져오기 위해서
+        FirebaseStoreService(this.userId);
+        final String userId;
+
+3. 스탬프 개수 반환 기능 구현
+    1) 스탬프 개수 반환 함수 비동기로 선언
+        Future<int> getStamps() async { ... } // 비동기 처리
+
+    2) 현재 유저의 도큐먼트 스냅샷 가져오기
+        DocumentSnapshot snapshot =     // 파이어베이스 DB의 특정 장면을 찍어서 저장하는 변수
+        await FirebaseFirestore.instance // 파이어베이스 스토어 객체
+          .collection('users')          // 의 users 컬렉션
+          .doc(userId)                  // 의 현재 유저 아이디의 도큐먼트
+          .get();                       // 를 가져옴
+
+    3) 가져온 스냅샷에서 스탬프 개수 추출하기
+        final _stampCount = snapshot.get('stampCount');
+            // stampCount 필드(속성?)의 값을 _stampCount 에 저장
+
+    4) 스탬프 개수 반환
+        return _stampCount is int ? _stampCount : 0;
+            // 만약 _stampCount 에 저장된 값이 int 타입이 맞다면 그 값을 반환
+            // int 타입이 아니라면(null 이라면) 0을 반환
+
+    5) try catch 문으로 감싸 예외 처리하기
+        FirebaseStore 에 접속하는 부분에서 에러가 발생할 경우를 처리
+        에러 로그 띄우고 0을 리턴
+
+4. 스탬프 개수 저장 기능
+
+    1) 스탬프 개수 설정 함수 비동기로 선언
+        Future<void> setStamps(int stamps) async { ... }
+
+    2) 현재 유저의 도큐먼트에 저장하기
+        await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .set({'stampCount': stamps}, SetOptions(merge: true));
+            // set : 도큐먼트 저장 함수
+            // 'stampCount' 필드 만들어 stamps 값으로 저장
+
+    3) try catch 문으로 감싸 예외 처리하기
+        FirebaseStore 에 접속하는 부분에서 에러가 발생할 경우를 처리
+        에러 로그 띄우고 0을 리턴
+
+5. 스탬프 개수 스트림 리스닝 기능
+
+6. 스탬프 화면
+
+    default_card_screen.dart 파일 참고
+
+7. 로그인한 유저 아이디 가져오기
+
+    fb_service.dart 의 setCurrentUserId()
+
+    shared preference 공간에 아이디 저장해두고 사용
+
+    lib -> values 폴더에 shared_preferences.dart 파일 생성
+
+    flutter pub add shared_preferences

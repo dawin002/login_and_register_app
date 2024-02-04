@@ -3,7 +3,7 @@ import 'package:login_register_app/utils/helpers/snackbar_helper.dart';
 
 import '../components/app_text_form_field.dart';
 import '../utils/common_widgets/gradient_background.dart';
-import '../utils/fb_service.dart';
+import '../utils/fb_auth.dart';
 import '../utils/helpers/navigation_helper.dart';
 import '../values/app_constants.dart';
 import '../values/app_regex.dart';
