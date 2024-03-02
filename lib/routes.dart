@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_register_app/screens/my_login_screen.dart';
 
 import 'screens/default_card_screen.dart';
 import 'screens/home_screen.dart';
@@ -37,6 +38,9 @@ class Routes {
 
       case AppRoutes.default_card:
         return getRoute(widget: const DefaultCardScreen());
+
+      case AppRoutes.my_login:
+        return getRoute(widget: const MyLoginScreen());
 
       /// An invalid route. User shouldn't see this,
       /// it's for debugging purpose only.
